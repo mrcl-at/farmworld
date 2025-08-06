@@ -1,0 +1,7 @@
+main: at.mrcl.farmworld.FarmWorldBootstrapper
+name: FarmWorld
+version: ${version}
+api-version: 1.21
+
+author: mrcl
+website: https://github.com/mrcl-at/farmworld
