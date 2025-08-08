@@ -5,6 +5,13 @@ import org.jetbrains.annotations.NotNull;
 public interface API {
 
     /**
+     * Determines whether static world names are enabled.
+     *
+     * @return true if static world names are enabled, false otherwise
+     */
+    boolean hasStaticWorldNames();
+
+    /**
      * Registers the provided {@link FarmWorld} instance.
      *
      * @param world The {@link FarmWorld} to be registered. Must not be null.

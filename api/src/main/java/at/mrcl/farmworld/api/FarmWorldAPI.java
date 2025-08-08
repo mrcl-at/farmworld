@@ -18,6 +18,15 @@ public class FarmWorldAPI {
     }
 
     /**
+     * Determines whether static world names are enabled.
+     *
+     * @return true if static world names are enabled, false otherwise
+     */
+    public static boolean hasStaticWorldNames() {
+        return api.hasStaticWorldNames();
+    }
+
+    /**
      * Registers the provided {@link FarmWorld} instance.
      *
      * @param world The {@link FarmWorld} to be registered. Must not be null.

@@ -8,5 +8,6 @@ import lombok.Setter;
 public class PluginConfig extends Config {
 
     private boolean defaultBootstrapper = true;
+    private boolean staticWorldNames = false;
 
 }

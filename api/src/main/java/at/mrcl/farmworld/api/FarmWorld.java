@@ -40,6 +40,15 @@ public interface FarmWorld {
     @Nullable String getGenerator();
 
     /**
+     * Generates a unique or static name for the farm world.
+     * If static world names are enabled, the generated name will be the name of the farm world.
+     * Otherwise, a unique identifier is appended to the name to ensure uniqueness.
+     *
+     * @return the generated name of the farm world, never null
+     */
+    @NotNull String generateWorldName();
+
+    /**
      * Checks whether the FarmWorld instance is enabled.
      *
      * @return true if the instance is enabled, false otherwise
@@ -51,7 +60,15 @@ public interface FarmWorld {
      *
      * @return an {@link Optional} containing the associated {@link File} if present, otherwise an empty {@link Optional}.
      */
-    @NotNull Optional<File> getFile();
+    Optional<File> getFile();
+
+    /**
+     * Retrieves the current {@link WorldData} associated with the {@link FarmWorld}, if one exists.
+     * The returned {@link WorldData} contains metadata about the current world, such as its name and creation timestamp.
+     *
+     * @return an {@link Optional} containing the current {@link WorldData} if a world is associated, or an empty {@link Optional} if no world is currently set
+     */
+    Optional<WorldData> getCurrentWorld();
 
     interface Builder {
         /**

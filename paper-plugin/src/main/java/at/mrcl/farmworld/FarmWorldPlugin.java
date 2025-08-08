@@ -4,6 +4,7 @@ import at.mrcl.farmworld.api.Bootstrapper;
 import at.mrcl.farmworld.api.FarmWorld;
 import at.mrcl.farmworld.api.FarmWorldAPI;
 import at.mrcl.farmworld.api.database.Database;
+import at.mrcl.farmworld.api.database.DatabaseException;
 import lombok.Getter;
 import org.bukkit.World;
 import org.slf4j.Logger;
@@ -65,9 +66,13 @@ public class FarmWorldPlugin {
                 try {
                     new FarmWorldLoader()
                             .readFile(file)
-                            .loadAndRegister();
+                            .loadAndRegister()
+                            .readWorldDataFromDatabase(this)
+                            .createWorldsIfEnabled();
                 } catch (IOException exception) {
                     getLogger().error("Failed to read file {}", file.getPath(), exception);
+                } catch (DatabaseException e) {
+                    getLogger().error("Failed to execute database operation!", e);
                 }
             }
         });

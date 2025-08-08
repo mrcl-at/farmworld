@@ -25,7 +25,7 @@ public class SQLiteDatabase implements Database {
      */
     @Getter
     private Connection connection;
-    private final WorldRepository worldRepository;
+    private WorldRepository worldRepository;
 
     /**
      * Creates a SQLite database using a default file name in the working directory.
@@ -42,7 +42,6 @@ public class SQLiteDatabase implements Database {
      */
     public SQLiteDatabase(String filePath) {
         this.jdbcUrl = filePath.startsWith("jdbc:sqlite:") ? filePath : "jdbc:sqlite:" + filePath;
-        this.worldRepository = new SQLiteWorldRepository();
     }
 
     @Override
@@ -77,6 +76,8 @@ public class SQLiteDatabase implements Database {
                 st.execute("PRAGMA synchronous = NORMAL;");
                 st.execute("PRAGMA busy_timeout = 5000;");
             }
+
+            this.worldRepository = new SQLiteWorldRepository(this);
         } catch (SQLException e) {
             throw new DatabaseException("Failed to connect to SQLite database: " + e.getMessage());
         }
@@ -114,6 +115,7 @@ public class SQLiteDatabase implements Database {
 
     @Override
     public @NotNull WorldRepository getWorldRepository() {
+        if (this.connection == null) throw new IllegalStateException("Database is not connected");
         return this.worldRepository;
     }
 

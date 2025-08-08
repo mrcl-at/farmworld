@@ -1,17 +1,24 @@
 package at.mrcl.farmworld;
 
 import at.mrcl.farmworld.api.FarmWorld;
+import at.mrcl.farmworld.api.FarmWorldAPI;
+import at.mrcl.farmworld.api.WorldData;
+import lombok.Setter;
 import org.bukkit.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.Optional;
+import java.util.UUID;
 
 public class CustomFarmWorld implements FarmWorld {
 
     private final FarmWorldConfig config;
     private final File file;
+
+    @Setter
+    private WorldData currentWorld;
 
     public CustomFarmWorld(FarmWorldConfig config, File file) {
         this.config = config;
@@ -39,6 +46,11 @@ public class CustomFarmWorld implements FarmWorld {
     }
 
     @Override
+    public @NotNull String generateWorldName() {
+        return FarmWorldAPI.hasStaticWorldNames() ? getName() : getName() + "-" + UUID.randomUUID().toString().split("-")[0];
+    }
+
+    @Override
     public boolean isEnabled() {
         return this.config.isEnabled();
     }
@@ -46,5 +58,10 @@ public class CustomFarmWorld implements FarmWorld {
     @Override
     public @NotNull Optional<File> getFile() {
         return Optional.ofNullable(this.file);
+    }
+
+    @Override
+    public Optional<WorldData> getCurrentWorld() {
+        return Optional.ofNullable(this.currentWorld);
     }
 }
