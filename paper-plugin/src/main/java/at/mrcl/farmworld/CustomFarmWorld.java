@@ -46,6 +46,16 @@ public class CustomFarmWorld implements FarmWorld {
     }
 
     @Override
+    public boolean useSeed() {
+        return this.config.isUseSeed();
+    }
+
+    @Override
+    public long getSeed() {
+        return this.config.getSeed();
+    }
+
+    @Override
     public @NotNull String generateWorldName() {
         return FarmWorldAPI.hasStaticWorldNames() ? getName() : getName() + "-" + UUID.randomUUID().toString().split("-")[0];
     }

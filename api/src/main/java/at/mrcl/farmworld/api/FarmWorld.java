@@ -40,6 +40,22 @@ public interface FarmWorld {
     @Nullable String getGenerator();
 
     /**
+     * Determines whether a specific seed should be used for generating the farm world.
+     *
+     * @return true if a seed is defined and should be used for world generation, false otherwise
+     * @see FarmWorld#getSeed()
+     */
+    boolean useSeed();
+    /**
+     * Retrieves the seed value associated with the farm world.
+     * The seed is used to generate the world and can influence its terrain and features.
+     *
+     * @return the seed value for the farm world
+     * @see FarmWorld#useSeed()
+     */
+    long getSeed();
+
+    /**
      * Generates a unique or static name for the farm world.
      * If static world names are enabled, the generated name will be the name of the farm world.
      * Otherwise, a unique identifier is appended to the name to ensure uniqueness.

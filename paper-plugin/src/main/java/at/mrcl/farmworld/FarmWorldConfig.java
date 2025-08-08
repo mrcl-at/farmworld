@@ -17,6 +17,8 @@ public class FarmWorldConfig extends Config {
 
     private World.Environment environment;
     private String generator;
+    private boolean useSeed;
+    private long seed;
 
     private boolean enabled = false;
 

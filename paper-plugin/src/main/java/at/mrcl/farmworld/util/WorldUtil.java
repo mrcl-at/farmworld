@@ -21,6 +21,7 @@ public class WorldUtil {
                 final var creator = new WorldCreator(farmWorld.generateWorldName());
                 creator.environment(farmWorld.getEnvironment());
                 if (farmWorld.getGenerator() != null) creator.generator(farmWorld.getGenerator());
+                if (farmWorld.useSeed()) creator.seed(farmWorld.getSeed());
                 future.complete(creator.createWorld());
             } catch (Exception exception) {
                 future.completeExceptionally(exception);
