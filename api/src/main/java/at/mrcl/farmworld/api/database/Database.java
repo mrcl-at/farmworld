@@ -1,5 +1,7 @@
 package at.mrcl.farmworld.api.database;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Represents a generic interface for database operations, providing a structure
  * for connecting and disconnecting from a database.
@@ -29,4 +31,16 @@ public interface Database {
      * @throws DatabaseException if an error occurs while disconnecting from the database.
      */
     void disconnect() throws DatabaseException;
+
+    /**
+     * Retrieves the repository for managing world-related data.
+     *
+     * This method provides access to an implementation of the {@code WorldRepository} interface,
+     * which allows for operations such as storage, retrieval, and manipulation of data
+     * related to "worlds". It is expected that the returned repository is properly
+     * initialized and ready for use.
+     *
+     * @return an instance of {@code WorldRepository}, never null.
+     */
+    @NotNull WorldRepository getWorldRepository();
 }

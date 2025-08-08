@@ -2,8 +2,10 @@ package at.mrcl.farmworld.database;
 
 import at.mrcl.farmworld.api.database.Database;
 import at.mrcl.farmworld.api.database.DatabaseException;
+import at.mrcl.farmworld.api.database.WorldRepository;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.sql.Connection;
@@ -23,6 +25,7 @@ public class SQLiteDatabase implements Database {
      */
     @Getter
     private Connection connection;
+    private final WorldRepository worldRepository;
 
     /**
      * Creates a SQLite database using a default file name in the working directory.
@@ -39,6 +42,7 @@ public class SQLiteDatabase implements Database {
      */
     public SQLiteDatabase(String filePath) {
         this.jdbcUrl = filePath.startsWith("jdbc:sqlite:") ? filePath : "jdbc:sqlite:" + filePath;
+        this.worldRepository = new SQLiteWorldRepository();
     }
 
     @Override
@@ -106,6 +110,11 @@ public class SQLiteDatabase implements Database {
         } finally {
             this.connection = null;
         }
+    }
+
+    @Override
+    public @NotNull WorldRepository getWorldRepository() {
+        return this.worldRepository;
     }
 
     /**
