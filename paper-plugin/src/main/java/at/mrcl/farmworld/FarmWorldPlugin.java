@@ -18,14 +18,16 @@ public class FarmWorldPlugin {
 
     @Getter private final Bootstrapper bootstrapper;
     @Getter private final Database database;
+    @Getter private final PluginConfig config;
 
     @Getter private final Map<String, FarmWorld> farmWorlds = new ConcurrentHashMap<>();
 
     private final AtomicBoolean enabled = new AtomicBoolean(false);
 
-    public FarmWorldPlugin(FarmWorldBootstrapper bootstrapper, Database database) throws Exception {
+    public FarmWorldPlugin(FarmWorldBootstrapper bootstrapper, Database database, PluginConfig config) throws Exception {
         this.bootstrapper = bootstrapper;
         this.database = database;
+        this.config = config;
     }
 
     public void enable() throws Exception {
