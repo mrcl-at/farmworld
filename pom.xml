@@ -6,7 +6,7 @@
 
     <groupId>at.mrcl.farmworld</groupId>
     <artifactId>FarmWorld</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>api</module>
