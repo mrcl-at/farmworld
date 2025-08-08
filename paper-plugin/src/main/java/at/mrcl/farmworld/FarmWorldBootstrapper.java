@@ -21,6 +21,8 @@ public class FarmWorldBootstrapper extends Bootstrapper {
             this.plugin = new FarmWorldPlugin(this, database);
             FarmWorldAPI.setApi(new APIImpl(this.plugin));
             loadFarmWorlds();
+
+            this.plugin.enable();
         } catch (Exception e) {
             getSLF4JLogger().error("Failed to enable plugin!", e);
             this.getServer().getPluginManager().disablePlugin(this);
