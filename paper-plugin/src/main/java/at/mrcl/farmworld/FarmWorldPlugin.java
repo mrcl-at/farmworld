@@ -2,6 +2,7 @@ package at.mrcl.farmworld;
 
 import at.mrcl.farmworld.api.Bootstrapper;
 import at.mrcl.farmworld.api.FarmWorld;
+import at.mrcl.farmworld.api.FarmWorldAPI;
 import at.mrcl.farmworld.api.database.Database;
 import lombok.Getter;
 import org.bukkit.World;
@@ -28,6 +29,8 @@ public class FarmWorldPlugin {
         this.bootstrapper = bootstrapper;
         this.database = database;
         this.config = config;
+
+        FarmWorldAPI.setApi(new APIImpl(this));
     }
 
     public void enable() throws Exception {

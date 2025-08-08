@@ -20,7 +20,6 @@ public class FarmWorldBootstrapper extends Bootstrapper {
 
             final var database = new SQLiteDatabase(this);
             this.plugin = new FarmWorldPlugin(this, database, config);
-            FarmWorldAPI.setApi(new APIImpl(this.plugin));
             this.plugin.enable();
         } catch (Exception e) {
             getSLF4JLogger().error("Failed to enable plugin!", e);
