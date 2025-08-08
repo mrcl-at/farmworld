@@ -1,5 +1,6 @@
 package at.mrcl.farmworld;
 
+import at.mrcl.farmworld.api.Bootstrapper;
 import at.mrcl.farmworld.api.FarmWorldAPI;
 import at.mrcl.farmworld.database.SQLiteDatabase;
 import org.bukkit.World;
@@ -9,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
-public class FarmWorldBootstrapper extends JavaPlugin {
+public class FarmWorldBootstrapper extends Bootstrapper {
 
     private FarmWorldPlugin plugin;
 
