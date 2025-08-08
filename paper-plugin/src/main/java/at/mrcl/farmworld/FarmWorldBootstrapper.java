@@ -1,6 +1,7 @@
 package at.mrcl.farmworld;
 
 import at.mrcl.farmworld.api.FarmWorldAPI;
+import at.mrcl.farmworld.database.SQLiteDatabase;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,14 +15,24 @@ public class FarmWorldBootstrapper extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.plugin = new FarmWorldPlugin(this);
-        FarmWorldAPI.setApi(new APIImpl(this.plugin));
-        loadFarmWorlds();
+        try {
+            final var database = new SQLiteDatabase(this);
+            this.plugin = new FarmWorldPlugin(this, database);
+            FarmWorldAPI.setApi(new APIImpl(this.plugin));
+            loadFarmWorlds();
+        } catch (Exception e) {
+            getSLF4JLogger().error("Failed to enable plugin!", e);
+            this.getServer().getPluginManager().disablePlugin(this);
+        }
     }
 
     @Override
     public void onDisable() {
-        this.plugin.disable();
+        try {
+            this.plugin.disable();
+        } catch (Exception e) {
+            getSLF4JLogger().error("Failed to disable plugin!", e);
+        }
     }
 
     private CompletableFuture<Void> loadFarmWorlds() {
