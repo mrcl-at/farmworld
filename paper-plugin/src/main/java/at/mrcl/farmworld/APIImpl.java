@@ -17,6 +17,11 @@ public class APIImpl implements API {
     }
 
     @Override
+    public boolean isVaultSupported() {
+        return this.plugin.getEconomy() != null;
+    }
+
+    @Override
     public void registerFarmWorld(@NotNull FarmWorld world) {
         this.plugin.getFarmWorlds().put(world.getName(), world);
         new FarmWorldRegisterEvent(world).callEvent();

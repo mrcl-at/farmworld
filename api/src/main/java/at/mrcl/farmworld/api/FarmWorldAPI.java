@@ -27,6 +27,15 @@ public class FarmWorldAPI {
     }
 
     /**
+     * Determines if the vault functionality is supported by the current API implementation.
+     *
+     * @return true if the vault functionality is supported, false otherwise
+     */
+    public static boolean isVaultSupported() {
+        return api.isVaultSupported();
+    }
+
+    /**
      * Registers the provided {@link FarmWorld} instance.
      *
      * @param world The {@link FarmWorld} to be registered. Must not be null.

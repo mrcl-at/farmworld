@@ -6,6 +6,8 @@ import at.mrcl.farmworld.api.FarmWorldAPI;
 import at.mrcl.farmworld.api.database.Database;
 import at.mrcl.farmworld.api.database.DatabaseException;
 import lombok.Getter;
+import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.slf4j.Logger;
 
@@ -23,6 +25,7 @@ public class FarmWorldPlugin {
     @Getter private final PluginConfig config;
 
     @Getter private final Map<String, FarmWorld> farmWorlds = new ConcurrentHashMap<>();
+    @Getter private final Economy economy;
 
     private final AtomicBoolean enabled = new AtomicBoolean(false);
 
@@ -31,12 +34,14 @@ public class FarmWorldPlugin {
         this.database = database;
         this.config = config;
 
+        this.economy = setupVault();
         FarmWorldAPI.setApi(new APIImpl(this));
     }
 
     public void enable() throws Exception {
         if (!this.enabled.compareAndSet(false, true)) throw new IllegalStateException("Plugin is already enabled!");
         this.database.connect();
+        if (economy == null) getLogger().warn("Vault not found, disabling economy support");
         loadFarmWorlds();
     }
 
@@ -109,5 +114,12 @@ public class FarmWorldPlugin {
         } catch (IOException exception) {
             getLogger().error("Failed to create default farm world!", exception);
         }
+    }
+
+    private Economy setupVault() {
+        if (Bukkit.getPluginManager().getPlugin("Vault") == null) return null;
+        final var provider = Bukkit.getServicesManager().getRegistration(Economy.class);
+        if (provider == null) return null;
+        return provider.getProvider();
     }
 }

@@ -12,6 +12,13 @@ public interface API {
     boolean hasStaticWorldNames();
 
     /**
+     * Determines if the vault functionality is supported by the current API implementation.
+     *
+     * @return true if the vault functionality is supported, false otherwise
+     */
+    boolean isVaultSupported();
+
+    /**
      * Registers the provided {@link FarmWorld} instance.
      *
      * @param world The {@link FarmWorld} to be registered. Must not be null.
