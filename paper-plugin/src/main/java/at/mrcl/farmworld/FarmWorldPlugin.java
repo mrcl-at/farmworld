@@ -109,7 +109,7 @@ public class FarmWorldPlugin {
         try {
             getLogger().warn("No farm worlds found!");
             getLogger().info("Creating default farm world.");
-            new FarmWorldConfig("FarmWorld", null, World.Environment.NORMAL, null, false)
+            new FarmWorldConfig("FarmWorld", null, World.Environment.NORMAL, null, false, 0L, false)
                     .save(new File(folder, "farm_world.json"));
         } catch (IOException exception) {
             getLogger().error("Failed to create default farm world!", exception);
